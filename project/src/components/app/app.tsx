@@ -5,13 +5,15 @@ import LoginPage from '../../pages/login-page/login-page';
 import Main from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import RoomPage from '../../pages/room-page/room-page';
+import { TOffer } from '../../types/offer';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   placesCount: string;
+  offers: TOffer[];
 };
 
-function App({ placesCount }: AppProps): JSX.Element {
+function App({ placesCount, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +31,7 @@ function App({ placesCount }: AppProps): JSX.Element {
           }
         />
         <Route path={EAppRoute.Offer}>
-          <Route path=':id' element={<RoomPage />} />
+          <Route path=':id' element={<RoomPage offer={offers[0]}/>} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
