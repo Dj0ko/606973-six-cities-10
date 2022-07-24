@@ -1,10 +1,12 @@
-import PlaceCard from '../../components/place-card/place-card';
+import OffersList from '../../components/offers-list/offers-list';
+import { TOffer } from '../../types/offer';
 
 type MainProps = {
   placesCount: string;
+  offers: TOffer[]
 }
 
-function Main({ placesCount }: MainProps): JSX.Element {
+function Main({ placesCount, offers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -94,13 +96,7 @@ function Main({ placesCount }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-              </div>
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
