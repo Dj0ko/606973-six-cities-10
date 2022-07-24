@@ -1,3 +1,4 @@
+import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import { TOffer } from '../../types/offer';
 
@@ -9,7 +10,7 @@ type MainProps = {
 function Main({ placesCount, offers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <header className="header">
+      {/* <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
@@ -36,7 +37,8 @@ function Main({ placesCount, offers }: MainProps): JSX.Element {
             </nav>
           </div>
         </div>
-      </header>
+      </header> */}
+      <AppHeader />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

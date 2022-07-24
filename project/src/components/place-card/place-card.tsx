@@ -1,4 +1,10 @@
-function PlaceCard (): JSX.Element {
+import { useState } from 'react';
+import { TOffer } from '../../types/offer';
+
+function PlaceCard (offer: TOffer): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isActive] = useState(false);
+
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
