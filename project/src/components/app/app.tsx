@@ -32,7 +32,7 @@ function App({ placesCount, offers }: AppProps): JSX.Element {
           }
         />
         <Route path={EAppRoute.Offer}>
-          <Route index element={<OffersList offers={offers}/>} />
+          <Route index element={<OffersList offers={offers} />} />
           <Route path=':id' element={<RoomPage />} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
