@@ -1,29 +1,31 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { EAppRoute } from '../../const';
 import { TOffer } from '../../types/offer';
 
 type TOffersListProps = {
   offer: TOffer;
+  className: string
 }
 
-function PlaceCard ({ offer }: TOffersListProps): JSX.Element {
+function PlaceCard ({ offer, className }: TOffersListProps): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isActive] = useState(false);
 
   const { isPremium, previewImage, price, title, type, id } = offer;
 
   return (
-    <article className="cities__card place-card">
+    <article className={`${className}__card place-card`}>
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="todo">
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+        <Link to={`${EAppRoute.Offer}/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place view" />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${className}__card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -43,7 +45,7 @@ function PlaceCard ({ offer }: TOffersListProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${id}`}>{title}</Link>
+          <Link to={`${EAppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

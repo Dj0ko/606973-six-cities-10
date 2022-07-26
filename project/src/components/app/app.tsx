@@ -9,12 +9,12 @@ import { TOffer } from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
+type TAppProps = {
   placesCount: string;
   offers: TOffer[];
 };
 
-function App({ placesCount, offers }: AppProps): JSX.Element {
+function App({ placesCount, offers }: TAppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

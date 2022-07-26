@@ -7,7 +7,7 @@ export type TOffer = {
       zoom: number,
     },
     name: string,
-  }
+  },
   description: string,
   goods: string[],
   host: {
@@ -15,7 +15,7 @@ export type TOffer = {
     id: number,
     isPro: boolean,
     name: string,
-  }
+  },
   id: number,
   images: string[],
   isFavorite: boolean,
@@ -24,7 +24,7 @@ export type TOffer = {
     latitude: number,
     longitude: number,
     zoom: number,
-  }
+  },
   maxAdults: number,
   previewImage: string,
   price: number,

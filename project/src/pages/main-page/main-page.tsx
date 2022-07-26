@@ -2,12 +2,12 @@ import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import { TOffer } from '../../types/offer';
 
-type MainProps = {
+type TMainProps = {
   placesCount: string;
   offers: TOffer[]
 }
 
-function Main({ placesCount, offers }: MainProps): JSX.Element {
+function Main({ placesCount, offers }: TMainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <AppHeader />
