@@ -1,4 +1,4 @@
-export type TOffer = {
+export type Offer = {
   bedrooms: number,
   city: {
     location: {

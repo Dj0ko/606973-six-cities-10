@@ -1,12 +1,12 @@
 import AppHeader from '../../components/app-header/app-header';
 import PlaceCard from '../../components/place-card/place-card';
-import { TOffer } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
-type TFavoritesPageProps = {
-  offers: TOffer[]
+type FavoritesPageProps = {
+  offers: Offer[]
 }
 
-function FavoritesPage({ offers }: TFavoritesPageProps): JSX.Element {
+function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <AppHeader />

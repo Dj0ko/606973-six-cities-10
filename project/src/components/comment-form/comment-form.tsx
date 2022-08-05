@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 
-type TCommentForm = {
+type CommentFormType = {
   [name: string]: string;
 }
 
 function CommentForm(): JSX.Element {
-  const [ commentForm, setCommentForm ] = useState<TCommentForm>({});
+  const [ commentForm, setCommentForm ] = useState<CommentFormType>({});
 
   const onInputChange = (evt: ChangeEvent<HTMLInputElement> & ChangeEvent<HTMLTextAreaElement>) => {
     const target = evt.target;
