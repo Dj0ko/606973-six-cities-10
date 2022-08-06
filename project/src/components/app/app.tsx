@@ -5,7 +5,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import Main from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import RoomPage from '../../pages/room-page/room-page';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 import OffersList from '../offers-list/offers-list';
 import PrivateRoute from '../private-route/private-route';
 

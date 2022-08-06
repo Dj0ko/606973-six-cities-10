@@ -1,6 +1,6 @@
 import AppHeader from '../../components/app-header/app-header';
 import PlaceCard from '../../components/place-card/place-card';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 
 type FavoritesPageProps = {
   offers: Offer[]

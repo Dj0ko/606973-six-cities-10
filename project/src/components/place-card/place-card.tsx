@@ -1,27 +1,35 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 
 type OffersListProps = {
   offer: Offer;
-  className: string
+  className: string;
+  onListItemHover?: (listItemName: string) => void;
 }
 
-function PlaceCard ({ offer, className }: OffersListProps): JSX.Element {
+function PlaceCard ({ offer, className, onListItemHover }: OffersListProps): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isActive] = useState(false);
 
   const { isPremium, previewImage, price, title, type, id } = offer;
 
+  const listItemHoverHandler = (event: MouseEvent<HTMLLIElement>) => {
+    event.preventDefault();
+    if (onListItemHover) {
+      onListItemHover(event.currentTarget.id);
+    }
+  };
+
   return (
-    <article className={`${className}__card place-card`}>
+    <article className={`${className}__card place-card`} onMouseEnter={listItemHoverHandler} id={`${id}`}>
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : null}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Offer}/${id}`}>
+        <Link to={`${AppRoute.Offer}/${id}`} >
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place view" />
         </Link>
       </div>
