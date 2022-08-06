@@ -1,14 +1,15 @@
 import PlaceCard from '../place-card/place-card';
-import { TOffer } from '../../types/offer';
+import { Offer } from '../../types';
 
-type TOffersListProps = {
-  offers: TOffer[];
+type OffersListProps = {
+  offers: Offer[];
+  onListItemHover?: (listItemName: string) => void;
 }
 
-function OffersList({ offers }: TOffersListProps): JSX.Element {
+function OffersList({ offers, onListItemHover }: OffersListProps): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} className="cities"/>)}
+      {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} onListItemHover={onListItemHover} className="cities"/>)}
     </div>
   );
 }
