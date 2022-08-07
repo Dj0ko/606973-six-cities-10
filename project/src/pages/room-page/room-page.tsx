@@ -1,19 +1,40 @@
 import { useParams } from 'react-router-dom';
 import AppHeader from '../../components/app-header/app-header';
-import PlaceCard from '../../components/place-card/place-card';
-import Review from '../../components/review/review';
-import { nearPlaces } from '../../mocks/near-places';
-import { offers } from '../../mocks/offers';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import NotFoundPage from '../not-found-page/not-found-page';
+import Map from '../../components/map/map';
+import { CITY, offers, reviews } from '../../mocks';
+import { useState } from 'react';
+import { Point } from '../../types';
+import OffersList from '../../components/offers-list/offers-list';
 
 function RoomPage(): JSX.Element {
   const params = useParams();
+  const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(undefined);
+  const currentRoom = offers.find((offer) => offer.id === Number(params.id));
+  const neighbourhoodRooms = offers.filter((offer) => offer.id !== Number(params.id));
 
-  const allOffers = [...offers, ...nearPlaces];
+  if (!currentRoom) {
+    return <NotFoundPage />;
+  }
 
-  const [currentRoom] = allOffers.filter((offer) => offer.id === Number(params.id));
+  const points = neighbourhoodRooms.map((offer) => ({
+    id: offer.id,
+    title: offer.title,
+    lat: offer.location.latitude,
+    lng: offer.location.longitude
+  }));
+
+
+  const onListItemHover = (listItemName: string) => {
+    const currentPoint = points.find((point) => point.id === Number(listItemName));
+
+    setSelectedPoint(currentPoint);
+  };
+
+
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods,
     host: { avatarUrl, isPro, name }, description } = currentRoom;
-
 
   return (
     <div className="page">
@@ -104,17 +125,19 @@ function RoomPage(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <Review />
+                <ReviewsList reviews={reviews}/>
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map city={CITY} points={points} selectedPoint={selectedPoint}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {nearPlaces.map((offer) => <PlaceCard key={offer.id} offer={offer} className="near-places"/>)}
+              <OffersList offers={neighbourhoodRooms} onListItemHover={onListItemHover}/>
             </div>
           </section>
         </div>
