@@ -2,7 +2,7 @@ import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import { Offer, Point } from '../../types';
-import { CITY } from '../../mocks/city';
+import { CITY } from '../../mocks';
 import { useState } from 'react';
 
 type MainProps = {
@@ -91,7 +91,9 @@ function Main({ placesCount, offers }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers} onListItemHover={onListItemHover} />
+              <div className="cities__places-list places__list tabs__content">
+                <OffersList offers={offers} onListItemHover={onListItemHover} />
+              </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
