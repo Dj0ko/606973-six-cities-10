@@ -10,7 +10,6 @@ function LocationList({locations} : LocationsListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const { city: { title } } = useAppSelector((state) => state);
 
-
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
