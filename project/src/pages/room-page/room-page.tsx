@@ -3,14 +3,17 @@ import AppHeader from '../../components/app-header/app-header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Map from '../../components/map/map';
-import { CITY, offers, reviews } from '../../mocks';
+import { offers, reviews } from '../../mocks';
 import { useState } from 'react';
 import { Point } from '../../types';
 import OffersList from '../../components/offers-list/offers-list';
+import { useAppSelector } from '../../hooks';
 
 function RoomPage(): JSX.Element {
   const params = useParams();
+  const { city } = useAppSelector((state) => state);
   const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(undefined);
+
   const currentRoom = offers.find((offer) => offer.id === Number(params.id));
   const neighbourhoodRooms = offers.filter((offer) => offer.id !== Number(params.id));
 
@@ -130,7 +133,7 @@ function RoomPage(): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={CITY} points={points} selectedPoint={selectedPoint}/>
+            <Map city={city} points={points} selectedPoint={selectedPoint}/>
           </section>
         </section>
         <div className="container">

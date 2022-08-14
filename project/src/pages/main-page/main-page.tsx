@@ -3,20 +3,15 @@ import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import LocationList from '../../components/location-list/location-list';
-import { Offer, Point } from '../../types';
-import { CITY } from '../../mocks';
+import { Point } from '../../types';
 import { LOCATIONS } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getOfferList } from '../../utils/get-offers-list';
 
-type MainProps = {
-  offers: Offer[]
-}
-
-function Main({ offers }: MainProps): JSX.Element {
+function Main(): JSX.Element {
   const { city } = useAppSelector((state) => state);
 
-  const currentLocationOffers = getOfferList(city.name);
+  const currentLocationOffers = getOfferList(city.title);
 
   const points = currentLocationOffers.map((offer) => ({
     id: offer.id,
@@ -48,7 +43,7 @@ function Main({ offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in {city}</b>
+              <b className="places__found">{currentLocationOffers.length} places to stay in {city.title}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -70,7 +65,7 @@ function Main({ offers }: MainProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={CITY} points={points} selectedPoint={selectedPoint}/>
+                <Map city={city} points={points} selectedPoint={selectedPoint}/>
               </section>
             </div>
           </div>

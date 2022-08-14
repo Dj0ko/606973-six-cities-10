@@ -1,11 +1,13 @@
+/* eslint-disable no-console */
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
-import { Map, TileLayer } from 'leaflet';
+import { LatLng, Map, TileLayer } from 'leaflet';
 import { City } from '../types';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
   city: City
 ): Map | null {
+
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
@@ -33,6 +35,12 @@ function useMap(
       isRenderedRef.current = true;
     }
   }, [mapRef, map, city]);
+
+  useEffect(() => {
+    if (map) {
+      map.panTo(new LatLng(city.lat, city.lng));
+    }
+  });
 
   return map;
 }
