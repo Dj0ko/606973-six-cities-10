@@ -6,15 +6,19 @@ import LocationList from '../../components/location-list/location-list';
 import { Offer, Point } from '../../types';
 import { CITY } from '../../mocks';
 import { LOCATIONS } from '../../const';
+import { useAppSelector } from '../../hooks/index';
+import { getOfferList } from '../../utils/get-offers-list';
 
 type MainProps = {
-  placesCount: string;
   offers: Offer[]
 }
 
-function Main({ placesCount, offers }: MainProps): JSX.Element {
+function Main({ offers }: MainProps): JSX.Element {
+  const { city } = useAppSelector((state) => state);
 
-  const points = offers.map((offer) => ({
+  const currentLocationOffers = getOfferList(city.name);
+
+  const points = currentLocationOffers.map((offer) => ({
     id: offer.id,
     title: offer.title,
     lat: offer.location.latitude,
@@ -44,7 +48,7 @@ function Main({ placesCount, offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">312 places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -61,7 +65,7 @@ function Main({ placesCount, offers }: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} onListItemHover={onListItemHover} />
+                <OffersList offers={currentLocationOffers} onListItemHover={onListItemHover} />
               </div>
             </section>
             <div className="cities__right-section">
