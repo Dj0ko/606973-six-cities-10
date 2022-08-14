@@ -1,18 +1,19 @@
+import { useState } from 'react';
 import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
-import { Offer, Point } from '../../types';
-import { CITY } from '../../mocks';
-import { useState } from 'react';
+import LocationList from '../../components/location-list/location-list';
+import { Point } from '../../types';
+import { LOCATIONS } from '../../const';
+import { useAppSelector } from '../../hooks/index';
+import { getOfferList } from '../../utils/get-offers-list';
 
-type MainProps = {
-  placesCount: string;
-  offers: Offer[]
-}
+function Main(): JSX.Element {
+  const { city } = useAppSelector((state) => state);
 
-function Main({ placesCount, offers }: MainProps): JSX.Element {
+  const currentLocationOffers = getOfferList(city.title);
 
-  const points = offers.map((offer) => ({
+  const points = currentLocationOffers.map((offer) => ({
     id: offer.id,
     title: offer.title,
     lat: offer.location.latitude,
@@ -36,46 +37,13 @@ function Main({ placesCount, offers }: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <LocationList locations={LOCATIONS}/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">{currentLocationOffers.length} places to stay in {city.title}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -92,12 +60,12 @@ function Main({ placesCount, offers }: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} onListItemHover={onListItemHover} />
+                <OffersList offers={currentLocationOffers} onListItemHover={onListItemHover} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={CITY} points={points} selectedPoint={selectedPoint}/>
+                <Map city={city} points={points} selectedPoint={selectedPoint}/>
               </section>
             </div>
           </div>
