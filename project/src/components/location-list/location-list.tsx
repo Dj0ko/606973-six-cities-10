@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/action';
 import { City } from '../../types';
 
@@ -8,6 +8,8 @@ type LocationsListProps = {
 
 function LocationList({locations} : LocationsListProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const { city: { title } } = useAppSelector((state) => state);
+
 
   return (
     <section className="locations container">
@@ -16,7 +18,7 @@ function LocationList({locations} : LocationsListProps): JSX.Element {
           const keyValue = `location-${index}`;
           return (
             <li className="locations__item" key={keyValue} onClick={() => dispatch(changeCity({ location }))}>
-              <a className="locations__item-link tabs__item" href="#">
+              <a className={`locations__item-link tabs__item ${title === location.title ? 'tabs__item--active' : ''}`} href="#">
                 <span>{location.title}</span>
               </a>
             </li>
