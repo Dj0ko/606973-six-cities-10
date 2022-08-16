@@ -20,14 +20,14 @@ function PlacesSorting(): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpened ? 'places__options--opened' : ''}`}>
-        {tabs.map((item, index) => (
+        {tabs.map((tab, index) => (
           <li
-            key={item.id}
+            key={tab.id}
             className={`places__option ${currentTab.id === index ? 'places__option--active' : ''}`}
             tabIndex={0}
-            onClick={() => setCurrentTab(item)}
+            onClick={() => setCurrentTab(tab)}
           >
-            {item.title}
+            {tab.title}
           </li>)
         )}
       </ul>
