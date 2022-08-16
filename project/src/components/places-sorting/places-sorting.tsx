@@ -28,8 +28,8 @@ function PlacesSorting(): JSX.Element {
             onClick={() => setCurrentTab(tab)}
           >
             {tab.title}
-          </li>)
-        )}
+          </li>
+        ))}
       </ul>
     </form>
   );
