@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import LocationList from '../../components/location-list/location-list';
-import { Point } from '../../types';
+import { Offer, Point } from '../../types';
 import { LOCATIONS } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getOfferList } from '../../utils';
@@ -11,8 +11,12 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 
 function Main(): JSX.Element {
   const { city } = useAppSelector((state) => state);
+  const { title } = city;
+  const [ currentLocationOffers, setCurrentLocationOffers ] = useState<Offer[]>([]);
 
-  const currentLocationOffers = getOfferList(city.title);
+  useEffect(() => {
+    setCurrentLocationOffers(getOfferList(title));
+  }, [title]);
 
   const points = currentLocationOffers.map((offer) => ({
     id: offer.id,
