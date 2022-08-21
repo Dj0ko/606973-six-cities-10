@@ -4,6 +4,7 @@ import { changeCity, setOffers } from './action';
 
 const initialState = {
   city:  {
+    id: 1,
     title: 'Paris',
     lat: 48.85661,
     lng: 2.351499,
