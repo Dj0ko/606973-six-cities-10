@@ -2,7 +2,8 @@ import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {City, Point} from '../../types';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import URL_MARKER_CURRENT from '../../img/pin-active.svg';
+import URL_MARKER_DEFAULT from '../../img/pin.svg';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
