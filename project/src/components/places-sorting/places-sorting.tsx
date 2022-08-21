@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { tabs } from '../../const';
+import { Tab } from '../../types';
 
-function PlacesSorting(): JSX.Element {
-  const [ popular ] = tabs;
+type PlacesSortingProps = {
+  handleSwitchTab: (tab: Tab) => void;
+  currentTab: Tab
+}
+
+function PlacesSorting({ handleSwitchTab, currentTab }: PlacesSortingProps): JSX.Element {
   const [ isOpened, setIsOpened ] = useState(false);
-  const [ currentTab, setCurrentTab ] = useState(popular);
 
   const toggleSortingMenu = () => {
     setIsOpened(!isOpened);
@@ -25,7 +29,9 @@ function PlacesSorting(): JSX.Element {
             key={tab.id}
             className={`places__option ${currentTab.id === index ? 'places__option--active' : ''}`}
             tabIndex={0}
-            onClick={() => setCurrentTab(tab)}
+            onClick={() => {
+              handleSwitchTab(tab);
+            }}
           >
             {tab.title}
           </li>

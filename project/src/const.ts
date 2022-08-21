@@ -1,4 +1,4 @@
-import { City, Tabs } from './types';
+import { City, Tab } from './types';
 
 export enum AppRoute {
   Main = '/',
@@ -57,22 +57,29 @@ export const LOCATIONS: City[] = [
     zoom: 13
   }];
 
-export const tabs: Tabs[] = [
+export enum Tabs {
+  Popular = 0,
+  PriceLowToHigh = 1,
+  PriceHighToLow = 2,
+  TopRatedFirst = 3
+}
+
+export const tabs: Tab[] = [
   {
     title: 'Popular',
-    id: 0
+    id: Tabs.Popular
   },
   {
     title: 'Price: low to high',
-    id: 1
+    id: Tabs.PriceLowToHigh
   },
   {
     title: 'Price: high to low',
-    id: 2
+    id: Tabs.PriceHighToLow
   },
   {
     title: 'Top rated first',
-    id: 3
+    id: Tabs.TopRatedFirst
   }
 ];
 

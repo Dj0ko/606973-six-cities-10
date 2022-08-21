@@ -3,8 +3,8 @@ import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import LocationList from '../../components/location-list/location-list';
-import { Offer, Point } from '../../types';
-import { LOCATIONS } from '../../const';
+import { Offer, Point, Tab } from '../../types';
+import { LOCATIONS, Tabs, tabs } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getOfferList } from '../../utils';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
@@ -12,11 +12,33 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 function Main(): JSX.Element {
   const { city } = useAppSelector((state) => state);
   const { title } = city;
+  const [ popular ] = tabs;
+
   const [ currentLocationOffers, setCurrentLocationOffers ] = useState<Offer[]>([]);
+  const [ sortedList, setSortedList ] = useState<Offer[]>([]);
+  const [ currentTab, setCurrentTab ] = useState(popular);
 
   useEffect(() => {
     setCurrentLocationOffers(getOfferList(title));
   }, [title]);
+
+  useEffect(() => {
+    const copiedList = [...currentLocationOffers];
+    switch (currentTab.id) {
+      case Tabs.PriceLowToHigh:
+        setSortedList(copiedList.sort((a,b) => a.price - b.price));
+        break;
+      case Tabs.PriceHighToLow:
+        setSortedList(copiedList.sort((a,b) => b.price - a.price));
+        break;
+      case Tabs.TopRatedFirst:
+        setSortedList(copiedList.sort((a,b) => b.rating - a.rating));
+        break;
+      default:
+        setSortedList([]);
+        break;
+    }
+  }, [currentLocationOffers, currentTab.id]);
 
   const points = currentLocationOffers.map((offer) => ({
     id: offer.id,
@@ -35,6 +57,10 @@ function Main(): JSX.Element {
     setSelectedPoint(currentPoint);
   };
 
+  const handleSwitchTab = (tab: Tab) => {
+    setCurrentTab(tab);
+  };
+
   return (
     <div className="page page--gray page--main">
       <AppHeader />
@@ -49,9 +75,9 @@ function Main(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentLocationOffers.length} places to stay in {city.title}</b>
-              <PlacesSorting />
+              <PlacesSorting handleSwitchTab={handleSwitchTab} currentTab={currentTab}/>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={currentLocationOffers} onListItemHover={onListItemHover} />
+                <OffersList offers={sortedList.length ? sortedList : currentLocationOffers} onListItemHover={onListItemHover} />
               </div>
             </section>
             <div className="cities__right-section">
