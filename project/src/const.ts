@@ -1,4 +1,4 @@
-import { City } from './types';
+import { City, Tab } from './types';
 
 export enum AppRoute {
   Main = '/',
@@ -12,12 +12,6 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 export const LOCATIONS: City[] = [
   {
@@ -56,4 +50,30 @@ export const LOCATIONS: City[] = [
     lng: 6.776314,
     zoom: 13
   }];
+
+export enum Tabs {
+  Popular = 0,
+  PriceLowToHigh = 1,
+  PriceHighToLow = 2,
+  TopRatedFirst = 3
+}
+
+export const tabs: Tab[] = [
+  {
+    title: 'Popular',
+    id: Tabs.Popular
+  },
+  {
+    title: 'Price: low to high',
+    id: Tabs.PriceLowToHigh
+  },
+  {
+    title: 'Price: high to low',
+    id: Tabs.PriceHighToLow
+  },
+  {
+    title: 'Top rated first',
+    id: Tabs.TopRatedFirst
+  }
+];
 
