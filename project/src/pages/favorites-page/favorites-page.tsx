@@ -1,9 +1,9 @@
 import AppHeader from '../../components/app-header/app-header';
 import PlaceCard from '../../components/place-card/place-card';
-import { Offer } from '../../types';
+import { Offers } from '../../types';
 
 type FavoritesPageProps = {
-  offers: Offer[]
+  offers: Offers
 }
 
 function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {

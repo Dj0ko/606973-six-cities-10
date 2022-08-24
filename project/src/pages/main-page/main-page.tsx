@@ -3,7 +3,7 @@ import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import LocationList from '../../components/location-list/location-list';
-import { Offer, Point, Tab } from '../../types';
+import { Offers, Point, Tab } from '../../types';
 import { Tabs, tabs } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getOfferList } from '../../utils';
@@ -14,8 +14,8 @@ function Main(): JSX.Element {
   const { title } = city;
   const [ popular ] = tabs;
 
-  const [ currentLocationOffers, setCurrentLocationOffers ] = useState<Offer[]>([]);
-  const [ sortedList, setSortedList ] = useState<Offer[]>([]);
+  const [ currentLocationOffers, setCurrentLocationOffers ] = useState<Offers>([]);
+  const [ sortedList, setSortedList ] = useState<Offers>([]);
   const [ currentTab, setCurrentTab ] = useState(popular);
 
   useEffect(() => {

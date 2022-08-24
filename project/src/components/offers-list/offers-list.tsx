@@ -1,8 +1,8 @@
 import PlaceCard from '../place-card/place-card';
-import { Offer } from '../../types';
+import { Offers } from '../../types';
 
 type OffersListProps = {
-  offers: Offer[];
+  offers: Offers;
   onListItemHover?: (listItemName: string) => void;
 }
 

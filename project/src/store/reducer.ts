@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Offer } from '../types';
-import { changeCity, setOffers } from './action';
+import { Offers } from '../types';
+import { changeCity, setOffers, loadOffers } from './action';
 
 const initialState = {
   city:  {
@@ -10,7 +10,7 @@ const initialState = {
     lng: 2.351499,
     zoom: 13
   },
-  offers: [] as Offer[]
+  offers: [] as Offers
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -22,6 +22,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setOffers, (state, action) => {
       const { offers } = action.payload;
       state.offers = offers;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     });
 });
 
