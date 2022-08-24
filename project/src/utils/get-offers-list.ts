@@ -1,4 +1,3 @@
 import { Offers } from '../types';
-import { offers } from '../mocks';
 
-export const getOfferList = (city: string): Offers => offers.filter((offer) => offer.city.name === city);
+export const getOfferList = (offers: Offers, city: string): Offers => offers.filter((offer) => offer.city.name === city);

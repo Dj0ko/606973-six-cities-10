@@ -1,8 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Offers } from '../types';
-import { changeCity, setOffers, loadOffers } from './action';
+import { City, Offers } from '../types';
+import { changeCity, setOffers, loadOffers, setDataLoadedStatus } from './action';
 
-const initialState = {
+type InitialState = {
+  city: City,
+  offers: Offers,
+  isDataLoaded: boolean
+}
+
+const initialState: InitialState = {
   city:  {
     id: 1,
     title: 'Paris',
@@ -10,7 +16,8 @@ const initialState = {
     lng: 2.351499,
     zoom: 13
   },
-  offers: [] as Offers
+  offers: [],
+  isDataLoaded: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -25,6 +32,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setDataLoadedStatus, (state, action) => {
+      state.isDataLoaded = action.payload;
     });
 });
 

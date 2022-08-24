@@ -10,7 +10,7 @@ import { getOfferList } from '../../utils';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 
 function Main(): JSX.Element {
-  const { city } = useAppSelector((state) => state);
+  const { city, offers } = useAppSelector((state) => state);
   const { title } = city;
   const [ popular ] = tabs;
 
@@ -19,8 +19,8 @@ function Main(): JSX.Element {
   const [ currentTab, setCurrentTab ] = useState(popular);
 
   useEffect(() => {
-    setCurrentLocationOffers(getOfferList(title));
-  }, [title]);
+    setCurrentLocationOffers(getOfferList(offers, title));
+  }, [offers, title]);
 
   useEffect(() => {
     const copiedList = [...currentLocationOffers];

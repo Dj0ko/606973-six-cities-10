@@ -13,6 +13,10 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+}
+
 export const LOCATIONS: City[] = [
   {
     id: 1,
