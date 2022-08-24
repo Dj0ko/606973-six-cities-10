@@ -1,12 +1,7 @@
 import AppHeader from '../../components/app-header/app-header';
-import PlaceCard from '../../components/place-card/place-card';
-import { Offer } from '../../types';
+// import PlaceCard from '../../components/place-card/place-card';
 
-type FavoritesPageProps = {
-  offers: Offer[]
-}
-
-function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
+function FavoritesPage(): JSX.Element {
   return (
     <div className="page">
       <AppHeader />
@@ -15,7 +10,7 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
+            {/* <ul className="favorites__list">
               {offers.map((offer) => {
                 const {city: { name } } = offer;
                 return (
@@ -33,7 +28,7 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                   </li>
                 );
               })}
-            </ul>
+            </ul> */}
           </section>
         </div>
       </main>

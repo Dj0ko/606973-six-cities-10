@@ -3,24 +3,24 @@ import AppHeader from '../../components/app-header/app-header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import LocationList from '../../components/location-list/location-list';
-import { Offer, Point, Tab } from '../../types';
-import { LOCATIONS, Tabs, tabs } from '../../const';
+import { Offers, Point, Tab } from '../../types';
+import { Tabs, tabs } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getOfferList } from '../../utils';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 
 function Main(): JSX.Element {
-  const { city } = useAppSelector((state) => state);
+  const { city, offers } = useAppSelector((state) => state);
   const { title } = city;
   const [ popular ] = tabs;
 
-  const [ currentLocationOffers, setCurrentLocationOffers ] = useState<Offer[]>([]);
-  const [ sortedList, setSortedList ] = useState<Offer[]>([]);
+  const [ currentLocationOffers, setCurrentLocationOffers ] = useState<Offers>([]);
+  const [ sortedList, setSortedList ] = useState<Offers>([]);
   const [ currentTab, setCurrentTab ] = useState(popular);
 
   useEffect(() => {
-    setCurrentLocationOffers(getOfferList(title));
-  }, [title]);
+    setCurrentLocationOffers(getOfferList(offers, title));
+  }, [offers, title]);
 
   useEffect(() => {
     const copiedList = [...currentLocationOffers];
@@ -68,7 +68,7 @@ function Main(): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationList locations={LOCATIONS}/>
+          <LocationList/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">

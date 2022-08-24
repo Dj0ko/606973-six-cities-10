@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppDispatch } from '../../hooks';
-import { offers } from '../../mocks';
-import { setOffers } from '../../store/action';
+import { useAppSelector } from '../../hooks';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import CircularIndeterminate from '../../pages/loading-screen/loading-screen';
 import LoginPage from '../../pages/login-page/login-page';
 import Main from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
@@ -12,11 +10,13 @@ import RoomPage from '../../pages/room-page/room-page';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
+  const { isDataLoaded } = useAppSelector((state) => state);
 
-  useEffect(() => {
-    dispatch(setOffers({ offers }));
-  }, [dispatch]);
+  if (isDataLoaded) {
+    return (
+      <CircularIndeterminate />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesPage offers={offers}/>
+              <FavoritesPage />
             </PrivateRoute>
           }
         />
