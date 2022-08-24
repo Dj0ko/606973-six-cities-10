@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import CircularIndeterminate from '../../pages/loading-screen/loading-screen';
 import LoginPage from '../../pages/login-page/login-page';
 import Main from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
@@ -16,7 +16,7 @@ function App(): JSX.Element {
 
   if (isDataLoaded) {
     return (
-      <LoadingScreen />
+      <CircularIndeterminate />
     );
   }
 

@@ -1,6 +1,8 @@
+import './loading-screen.style.css';
+
 function LoadingScreen(): JSX.Element {
   return (
-    <p>Loading ...</p>
+    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
   );
 }
 
