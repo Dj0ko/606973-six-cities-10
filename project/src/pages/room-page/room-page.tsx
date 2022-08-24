@@ -1,9 +1,8 @@
 import { useParams } from 'react-router-dom';
 import AppHeader from '../../components/app-header/app-header';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+// import ReviewsList from '../../components/reviews-list/reviews-list';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Map from '../../components/map/map';
-import { offers, reviews } from '../../mocks';
 import { useState } from 'react';
 import { Point } from '../../types';
 import OffersList from '../../components/offers-list/offers-list';
@@ -11,7 +10,7 @@ import { useAppSelector } from '../../hooks';
 
 function RoomPage(): JSX.Element {
   const params = useParams();
-  const { city } = useAppSelector((state) => state);
+  const { city, offers } = useAppSelector((state) => state);
   const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(undefined);
 
   const currentRoom = offers.find((offer) => offer.id === Number(params.id));
@@ -128,7 +127,7 @@ function RoomPage(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewsList reviews={reviews}/>
+                {/* <ReviewsList reviews={reviews}/> */}
               </section>
             </div>
           </div>
