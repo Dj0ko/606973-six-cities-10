@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
@@ -12,7 +11,6 @@ import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
   const { isDataLoaded } = useAppSelector((state) => state);
-  console.log(isDataLoaded);
 
   if (isDataLoaded) {
     return (
