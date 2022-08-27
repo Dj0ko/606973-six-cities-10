@@ -3,9 +3,9 @@ import { AxiosInstance } from 'axios';
 import { store } from '.';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { AuthData, Offers, UserData } from '../types';
+import { AuthData, Offer, Offers, Reviews, UserData } from '../types';
 import { AppDispatch, State } from '../types/state';
-import { loadOffers, redirectToRoute, requireAuthorization, setDataLoadedStatus, setError } from './action';
+import { loadCurrentOffer, loadCurrentOfferNearby, loadCurrentOfferReviews, loadOffers, redirectToRoute, requireAuthorization, setDataLoadedStatus, setError } from './action';
 
 export const clearErrorAction = createAsyncThunk(
   'game/clearError',
@@ -24,9 +24,51 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/loadOffers',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Offers>(APIRoute.Offers);
+    dispatch(setDataLoadedStatus(true));
     dispatch(loadOffers(data));
+    dispatch(setDataLoadedStatus(false));
+  },
+);
+
+export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}>(
+  'data/loadCurrentOffer',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+    dispatch(setDataLoadedStatus(true));
+    dispatch(loadCurrentOffer(data));
+    dispatch(setDataLoadedStatus(false));
+  },
+);
+
+export const fetchCurrentOfferReviewsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}>(
+  'data/loadCurrentOffer',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Reviews>(`${APIRoute.Comments}/${id}`);
+    dispatch(setDataLoadedStatus(true));
+    dispatch(loadCurrentOfferReviews(data));
+    dispatch(setDataLoadedStatus(false));
+  },
+);
+
+export const fetchCurrentOfferNearbyAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}>(
+  'data/loadCurrentOfferNearby',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offers>(`${APIRoute.Offers}/${id}/nearby`);
+    dispatch(setDataLoadedStatus(true));
+    dispatch(loadCurrentOfferNearby(data));
     dispatch(setDataLoadedStatus(false));
   },
 );

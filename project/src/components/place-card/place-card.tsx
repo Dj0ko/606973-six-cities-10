@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Offer } from '../../types';
@@ -10,9 +10,6 @@ type OffersListProps = {
 }
 
 function PlaceCard ({ offer, className, onListItemHover }: OffersListProps): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isActive] = useState(false);
-
   const { isPremium, previewImage, price, title, type, id } = offer;
 
   const listItemHoverHandler = (event: MouseEvent<HTMLLIElement>) => {

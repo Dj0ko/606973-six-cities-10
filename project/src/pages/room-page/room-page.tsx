@@ -1,26 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 import { useParams } from 'react-router-dom';
 import AppHeader from '../../components/app-header/app-header';
 // import ReviewsList from '../../components/reviews-list/reviews-list';
-import NotFoundPage from '../not-found-page/not-found-page';
+
 import Map from '../../components/map/map';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Point } from '../../types';
 import OffersList from '../../components/offers-list/offers-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchCurrentOfferAction, fetchCurrentOfferNearbyAction } from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function RoomPage(): JSX.Element {
+  const { currentOffer, currentOfferNearby } = useAppSelector((state) => state);
   const params = useParams();
-  const { city, offers } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchCurrentOfferAction(params.id));
+      dispatch(fetchCurrentOfferNearbyAction(params.id));
+    }
+  }, [dispatch, params.id]);
+
+  const { city } = useAppSelector((state) => state);
   const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(undefined);
 
-  const currentRoom = offers.find((offer) => offer.id === Number(params.id));
-  const neighbourhoodRooms = offers.filter((offer) => offer.id !== Number(params.id));
-
-  if (!currentRoom) {
-    return <NotFoundPage />;
+  if (!currentOffer) {
+    return <LoadingScreen />;
   }
 
-  const points = neighbourhoodRooms.map((offer) => ({
+  const points = currentOfferNearby.map((offer) => ({
     id: offer.id,
     title: offer.title,
     lat: offer.location.latitude,
@@ -36,7 +47,7 @@ function RoomPage(): JSX.Element {
 
 
   const { images, isPremium, title, rating, type, bedrooms, maxAdults, price, goods,
-    host: { avatarUrl, isPro, name }, description } = currentRoom;
+    host: { avatarUrl, isPro, name }, description } = currentOffer;
 
   return (
     <div className="page">
@@ -132,14 +143,14 @@ function RoomPage(): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={city} points={points} selectedPoint={selectedPoint}/>
+            <Map city={city} points={points} selectedPoint={selectedPoint} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OffersList offers={neighbourhoodRooms} onListItemHover={onListItemHover}/>
+              <OffersList offers={currentOfferNearby} onListItemHover={onListItemHover}/>
             </div>
           </section>
         </div>
