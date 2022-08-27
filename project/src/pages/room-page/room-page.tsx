@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
 import { useParams } from 'react-router-dom';
 import AppHeader from '../../components/app-header/app-header';
 import ReviewsList from '../../components/reviews-list/reviews-list';

@@ -1,9 +1,10 @@
+import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import CommentForm from '../comment-form/comment-form';
 import ReviewsItem from '../reviews-item/reviews-item';
 
 function ReviewsList(): JSX.Element {
-  const { reviews } = useAppSelector((state) => state);
+  const { reviews, authorizationStatus } = useAppSelector((state) => state);
 
   return (
     <>
@@ -11,7 +12,7 @@ function ReviewsList(): JSX.Element {
       <ul className="reviews__list">
         {reviews.map((review) => <ReviewsItem {...review} key={review.id}/>)}
       </ul>
-      <CommentForm />
+      {authorizationStatus === AuthorizationStatus.Auth ? <CommentForm /> : null}
     </>
   );
 }

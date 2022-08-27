@@ -8,11 +8,13 @@ export const setOffers = createAction<{offers: Offers}>('hotels/setOffers');
 
 export const loadOffers = createAction<Offers>('data/loadOffers');
 
-export const loadCurrentOffer = createAction<Offer>('data/loadCurrentOffer');
+export const loadCurrentOffer = createAction<Offer>('offer/loadCurrentOffer');
 
-export const loadCurrentOfferReviews = createAction<Reviews>('data/loadCurrentOfferReviews');
+export const loadCurrentOfferReviews = createAction<Reviews>('offer/loadCurrentOfferReviews');
 
-export const loadCurrentOfferNearby = createAction<Offers>('data/loadCurrentOfferNearby');
+export const loadCurrentOfferNearby = createAction<Offers>('offer/loadCurrentOfferNearby');
+
+export const sendComment = createAction<string>('offer/sendComment');
 
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
