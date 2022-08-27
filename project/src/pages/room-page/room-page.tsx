@@ -2,14 +2,14 @@
 /* eslint-disable no-console */
 import { useParams } from 'react-router-dom';
 import AppHeader from '../../components/app-header/app-header';
-// import ReviewsList from '../../components/reviews-list/reviews-list';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 
 import Map from '../../components/map/map';
 import { useEffect, useState } from 'react';
 import { Point } from '../../types';
 import OffersList from '../../components/offers-list/offers-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchCurrentOfferAction, fetchCurrentOfferNearbyAction } from '../../store/api-actions';
+import { fetchCurrentOfferAction, fetchCurrentOfferNearbyAction, fetchCurrentOfferReviewsAction } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function RoomPage(): JSX.Element {
@@ -21,6 +21,7 @@ function RoomPage(): JSX.Element {
     if (params.id) {
       dispatch(fetchCurrentOfferAction(params.id));
       dispatch(fetchCurrentOfferNearbyAction(params.id));
+      dispatch(fetchCurrentOfferReviewsAction(params.id));
     }
   }, [dispatch, params.id]);
 
@@ -138,7 +139,7 @@ function RoomPage(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                {/* <ReviewsList reviews={reviews}/> */}
+                <ReviewsList/>
               </section>
             </div>
           </div>

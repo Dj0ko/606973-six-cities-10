@@ -10,7 +10,7 @@ export const loadOffers = createAction<Offers>('data/loadOffers');
 
 export const loadCurrentOffer = createAction<Offer>('data/loadCurrentOffer');
 
-export const loadCurrentOfferReviews = createAction<Reviews>('data/loadCurrentOffer');
+export const loadCurrentOfferReviews = createAction<Reviews>('data/loadCurrentOfferReviews');
 
 export const loadCurrentOfferNearby = createAction<Offers>('data/loadCurrentOfferNearby');
 

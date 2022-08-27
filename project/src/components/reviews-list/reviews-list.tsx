@@ -1,12 +1,9 @@
-import { Review } from '../../types';
+import { useAppSelector } from '../../hooks';
 import CommentForm from '../comment-form/comment-form';
 import ReviewsItem from '../reviews-item/reviews-item';
 
-type ReviewsListProps = {
-  reviews: Review[]
-}
-
-function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
+function ReviewsList(): JSX.Element {
+  const { reviews } = useAppSelector((state) => state);
 
   return (
     <>

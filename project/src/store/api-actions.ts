@@ -50,7 +50,7 @@ export const fetchCurrentOfferReviewsAction = createAsyncThunk<void, string, {
   state: State,
   extra: AxiosInstance,
 }>(
-  'data/loadCurrentOffer',
+  'data/loadCurrentOfferReviews',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Reviews>(`${APIRoute.Comments}/${id}`);
     dispatch(setDataLoadedStatus(true));
